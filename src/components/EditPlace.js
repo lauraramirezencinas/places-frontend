@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import UploadImage from './uploadimage/UploadImage'
 
 export default class EditPlace extends Component {
     constructor(props) {
@@ -7,11 +8,25 @@ export default class EditPlace extends Component {
         this.state = {
             name: '',
             description: '',
-            imageUrl: ''
+            imageUrl: '',
+            loc: {
+                type: 'Point',
+                coordinates: [0, 0],
+            },
+            highlight: false,
+            imageFile: null,
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentDidMount() {
+        const id = this.props.match.params.id
+        axios.get(`http://localhost:5000/api/places/${id}`)
+            .then(response => {
+                this.setState(response.data)
+            })
     }
 
     handleChange = (event) => {
@@ -20,23 +35,27 @@ export default class EditPlace extends Component {
         })
     }
 
-    handleUpload = (event) => {
-        const uploadData = new FormData()
-        uploadData.append('imageUrl', event.target.files[0])
-        console.log(event.target.files[0])
-        axios.post()
+    handleUpload = (file) => {
+        this.setState({
+            imageFile: file
+        })
     }
 
     handleSubmit = (event) => {
-        const name = this.state.name
-        const description = this.state.description
         const id = this.props.match.params.id
+        const uploadData = new FormData()
+        if (this.state.imageFile) {
+            uploadData.append('imageUrl', this.state.imageFile)
+        }
+
+        uploadData.append('name', this.state.name)
+        uploadData.append('description', this.state.description)
+
         event.preventDefault()
-        axios.put(`http://localhost:5000/api/places/${id}`, {name, description})
-        .then(() => {
-            
-        })
+        axios.put(`http://localhost:5000/api/places/${id}`, uploadData)
+
     }
+
 
 
     render() {
@@ -64,16 +83,7 @@ export default class EditPlace extends Component {
                             onChange={this.handleChange}
                         />
                     </div>
-                    <div className="form-group">
-                        <label>Photo:</label>
-                        <input
-                            type="file"
-                            className="form-control"
-                            name="imageUrl"
-                            value={this.state.imageUrl}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    <UploadImage handleImageChange={this.handleUpload} />
                     <input type="submit"
                         className="btn btn-primary"
                         value="Submit" />

@@ -20,7 +20,8 @@ function App() {
 				<Route excat path="/list" component={Lista} />
 				<Route exact path="/add" component={AddPlace} />
 				<Route exact path="/admin" render={(props) => <Admin {...props} />} />
-        <Route exact path="/search" render={(props) => <SearchLocation {...props} />} />
+				<Route exact path="/search" render={(props) => <SearchLocation {...props} />} />
+				<Route exact path="/place/:id/edit" render={(props) => <EditPlace {...props} />} />
 			</Switch>
 		</div>
 	);
