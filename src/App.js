@@ -13,7 +13,7 @@ function App() {
 			<NavigationBar />
 			<Switch>
 				<Route exact path="/" render={(props) => <Homepage {...props} />} />
-        <Route excat path="/list" component={Lista} />
+        <Route exact path="/list" component={Lista} />
         <Route exact path="/admin" render={(props) => <Admin {...props} />} />
 			</Switch>
 		</div>
