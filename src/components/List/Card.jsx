@@ -6,7 +6,7 @@ function Card(props) {
     const {imageUrl, title, description} = props.place
 
     return (
-        <div className="d-flex container-fluid">
+        <div className="d-flex container-fluid my-2">
             <ImageContainer image={imageUrl}/>
             <div className="d-flex container flex-column">
                 <h3>{title}</h3>

@@ -7,6 +7,8 @@ import NavigationBar from './components/NavigationBar';
 import Lista from './components/List/Lista';
 import Admin from './components/Admin';
 import AddPlace from './components/addplace/AddPlace';
+import EditPlace from './components/EditPlace';
+import PlaceDetails from './components/PlaceDetails';
 
 function App() {
 	return (
