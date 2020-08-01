@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import EditPlace from './EditPlace'
 
 export default class Admin extends Component {
 
@@ -45,7 +46,7 @@ export default class Admin extends Component {
             <h3>{place.description}</h3>
             <button className='btn btn-danger' onClick={() => this.delete(place._id)}>Remove</button>
             <button className='btn btn-primary' onClick={() => this.toggleStatus(place._id)}>Edit</button>
-            {place.edit && <p>Edit Form</p>}           
+            {place.edit && <EditPlace place={place} />}          
         </div>
     )
 
