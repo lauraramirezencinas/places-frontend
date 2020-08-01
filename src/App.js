@@ -5,6 +5,7 @@ import {Switch, Route} from "react-router-dom";
 import Homepage from "./components/Homepage";
 import NavigationBar from "./components/NavigationBar";
 import Lista from "./components/List/Lista";
+import Admin from "./components/Admin";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 			<Switch>
 				<Route exact path="/" render={(props) => <Homepage {...props} />} />
 				<Route excat path="/list" component={Lista} />
+				<Route exact path="/admin" render={(props) => <Admin {...props} />} />
 			</Switch>
 		</div>
 	);
