@@ -28,13 +28,6 @@ export class SearchLocation extends Component {
             })
     }
 
-    selectPlace = (position) => {
-        console.log("SearchLocation.selectPlace results: ", position)
-        // call props function to send info for container component
-        // and send position...
-        this.props.callback(position)
-    }
-
 
     render() {
         const candidates = this.state.candidates.map(local => (
@@ -51,7 +44,6 @@ export class SearchLocation extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <input type="text"
                         name="search"
-                        placeholder="place, ex: 'Paris'"
                         value={this.state.search}
                         onChange={this.handleChange} />
                     <input type="submit" value="buscar" />
